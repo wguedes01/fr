@@ -1,0 +1,12 @@
+[
+	{
+		"_id": ObjectId("5143afc66d44e1ceb372121a"),
+		"members": ["will", "jess"],
+		"name": "Varana"
+	},
+	{
+		"_id": ObjectId("5143afc66d44e1ceb372121b"),
+		"members": ["michael", "maggie"],
+		"name": "Allen"
+	}
+]

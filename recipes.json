@@ -1,0 +1,35 @@
+[
+	{
+		"author": "will",
+		"can_access": ["will", ObjectId("5143afc66d44e1ceb372121a")],
+		"title": "Brigadeiro Brasileiro",
+		"ingredients": [
+			{
+				"id": 0,
+				"text": "i1"
+			},
+			{
+				"id": 1,
+				"text": "i2"
+			},
+			{
+				"id": 2,
+				"text": "i3"
+			}
+		],
+		"instructions": [
+			{
+				"id": 0,
+				"text": "hello"
+			},
+			{
+				"id": 1,
+				"text": "can you hear me?"
+			},
+			{
+				"id": 0,
+				"text": "Cook stuff"
+			}
+		]
+	}
+]
