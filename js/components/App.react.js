@@ -1,5 +1,6 @@
 var React = require('react');
 var LeftSideMenu = require('./LeftSideMenu.react');
+var SimpleEditor = require('./SimpleEditor.react');
 
 var menuItems = ['My recipes', 'Trending', 'Invite family'];
 
@@ -19,6 +20,7 @@ var App = React.createClass({
 					onMenuItemClicked={this._onMenuItemClicked}
 				/>
 				<h1>{menuItems[this.state.menuItemSelected]}</h1>
+				<SimpleEditor/>
 			</div>
 		);
 	},
