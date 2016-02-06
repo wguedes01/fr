@@ -17,6 +17,7 @@ var CardSet = React.createClass({
 
 		for(key in cards) {
 			if(this.state.filterValue == ''
+					// TODO: fix case sesitive search
 					|| cards[key].text.indexOf(this.state.filterValue) !== -1
 					|| cards[key].title.indexOf(this.state.filterValue) !== -1) {
 				cardComponents.push(

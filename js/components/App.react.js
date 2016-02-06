@@ -7,6 +7,7 @@ var App = React.createClass({
 
 	getInitialState: function() {
 		return {
+			// TODO: Add tags to recipes
 			cards: [
 				{text: "Hello", title: "Adele"},
 				{text: "Can you hear me?", title: "Bacon"},
@@ -22,7 +23,20 @@ var App = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<CardSet cards={this.state.cards}/>
+				<div className="container-fluid">
+					<div className="row">
+						<div class="col-md-2 sidebar">
+							<ul>
+								<li>Hello</li>
+								<li>Hello</li>
+								<li>Hello</li>
+							</ul>
+						</div>
+						<div className="col-md-10 main">
+							<CardSet cards={this.state.cards}/>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
