@@ -1,6 +1,5 @@
 var React = require('react');
-var LeftSideMenu = require('./LeftSideMenu.react');
-var SimpleEditor = require('./SimpleEditor.react');
+var CardSet = require('./CardSet.react');
 
 var menuItems = ['My recipes', 'Trending', 'Invite family'];
 
@@ -8,27 +7,24 @@ var App = React.createClass({
 
 	getInitialState: function() {
 		return {
-			menuItemSelected: 0
+			cards: [
+				{text: "Hello", title: "Adele"},
+				{text: "Can you hear me?", title: "Bacon"},
+				{text: "Hello", title: "Adele"},
+				{text: "Can you hear me?", title: "Bacon"},
+				{text: "Hello", title: "Adele"},
+				{text: "Can you hear me?", title: "Bacon"},
+				{text: "Jess's favorite!", title: "French Fries"}
+			]
 		};
 	},
 
 	render: function() {
 		return (
 			<div>
-				<LeftSideMenu
-					items={menuItems}
-					onMenuItemClicked={this._onMenuItemClicked}
-				/>
-				<h1>{menuItems[this.state.menuItemSelected]}</h1>
-				<SimpleEditor/>
+				<CardSet cards={this.state.cards}/>
 			</div>
 		);
-	},
-
-	_onMenuItemClicked: function(index) {
-		this.setState({
-			menuItemSelected: index
-		});
 	}
 });
 

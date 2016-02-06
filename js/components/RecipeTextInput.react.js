@@ -10,7 +10,7 @@ var RecipeTextInput = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<textarea onChange={this._onChange}>{this.state.value}</textarea>
+				<textarea onChange={this._onChange} value={this.state.value}></textarea>
 				<h1>{this.state.value}</h1>
 			</div>
 		);
