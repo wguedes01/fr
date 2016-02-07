@@ -23,8 +23,11 @@ var CardSet = React.createClass({
 				cardComponents.push(
 					<div className="col-xs-6 col-md-3">
 						<Card
+							id={cards[key].id}
 							text={cards[key].text}
-							title={cards[key].title} />
+							title={cards[key].title} 
+							onCardClick={this.handleOnCardClick}
+							/>
 						</div>
 				);
 			}
@@ -37,7 +40,6 @@ var CardSet = React.createClass({
 		);
 
 		return (
-			<div>
 				<div className="container">
 				<h1>Recipe Book</h1>
 				<CardSearch onSearchFilterChange={this._onSearchFilterChange}/>
@@ -45,17 +47,20 @@ var CardSet = React.createClass({
 							{cardComponents}
 					</div>
 				</div>
-			</div>
 		);
 	},
 
 	_handleAdBtnCardClick: function() {
-		alert('Hi');
+		this.props.handleStartNewRecipeNav();
 	},
 
 	_onSearchFilterChange: function(filterValue) {
 		console.log('filtering cards..' + filterValue);
 		this.setState(assign({}, this.state, {filterValue: filterValue}));
+	},
+
+	handleOnCardClick: function(cardId) {
+		console.log('card clicked: ' + cardId);
 	}
 });
 

@@ -1,4 +1,5 @@
 var React = require('react');
+var RecipeCardActionCreators = require('../actions/RecipeCardActionCreators');
 
 var Card = React.createClass({
 	render: function() {
@@ -7,7 +8,7 @@ var Card = React.createClass({
 		};
 
 		return (
-			<div className="thumbnail">
+			<div className="thumbnail" onClick={this._onClick}>
 				<img style={imgStyle} src="http://freecoconutrecipes.com/wp-content/uploads/sites/10/2014/12/Roast_Chicken_with_Coconut_Oil_recipe_photo.jpg" alt="..."/>
 				<div className="caption">
 					<h3>{this.props.title}</h3>
@@ -15,6 +16,11 @@ var Card = React.createClass({
 				</div>
 			</div>
 		);
+	},
+
+	_onClick: function() {
+		console.log('Clicked card ' + this.props.id)
+		RecipeCardActionCreators.clickRecipeCard(this.props.id);
 	}
 });
 
