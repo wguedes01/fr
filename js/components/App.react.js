@@ -18,21 +18,17 @@ var App = React.createClass({
 	getInitialState: function() {
 		return {
 			// TODO: Add tags to recipes
-			cards: [
-				{text: "Hello", title: "Adele", id: 0},
-				{text: "Can you hear me?", title: "Bacon", id: 1},
-				{text: "Hello", title: "Adele", id: 2},
-				{text: "Can you hear me?", title: "Bacon", id: 3},
-				{text: "Hello", title: "Adele", id: 4},
-				{text: "Can you hear me?", title: "Bacon", id: 5},
-				{text: "Jess's favorite!", title: "French Fries", id: 6}
-			],
-			currentTab: 0
+			currentTab: 0,
+			recipeCards: RecipeCardStore.getAll()
 		};
 	},
 
 	componentDidMount: function() {
 		RecipeCardStore.addChangeListener(this._onChange);
+	},
+
+	componentWillUnmount: function() {
+		RecipeCardStore.removeChangeListener(this._onChange);
 	},
 
 	render: function() {
@@ -55,7 +51,7 @@ var App = React.createClass({
 							{
 								this.state.currentTab === 0 ?
 									<CardSet 
-										cards={this.state.cards}
+										cards={this.state.recipeCards}
 										handleStartNewRecipeNav={this.handleStartNewRecipeNav}
 									/> :
 									null
