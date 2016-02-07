@@ -14,19 +14,18 @@ var CardSet = React.createClass({
 	render: function() {
 		var cards = this.props.cards;
 		var cardComponents = [];
-
 		for(key in cards) {
+			var card = cards[key];
 			if(this.state.filterValue == ''
 					// TODO: fix case sesitive search
-					|| cards[key].text.indexOf(this.state.filterValue) !== -1
-					|| cards[key].title.indexOf(this.state.filterValue) !== -1) {
+					|| card.text.indexOf(this.state.filterValue) !== -1
+					|| card.title.indexOf(this.state.filterValue) !== -1) {
 				cardComponents.push(
 					<div className="col-xs-6 col-md-3">
 						<Card
-							id={cards[key].id}
-							text={cards[key].text}
-							title={cards[key].title} 
-							onCardClick={this.handleOnCardClick}
+							id={card.id}
+							text={card.text}
+							title={card.title} 
 							/>
 						</div>
 				);
@@ -57,10 +56,6 @@ var CardSet = React.createClass({
 	_onSearchFilterChange: function(filterValue) {
 		console.log('filtering cards..' + filterValue);
 		this.setState(assign({}, this.state, {filterValue: filterValue}));
-	},
-
-	handleOnCardClick: function(cardId) {
-		console.log('card clicked: ' + cardId);
 	}
 });
 

@@ -19,7 +19,6 @@ var Card = React.createClass({
 	},
 
 	_onClick: function() {
-		console.log('Clicked card ' + this.props.id)
 		RecipeCardActionCreators.clickRecipeCard(this.props.id);
 	}
 });

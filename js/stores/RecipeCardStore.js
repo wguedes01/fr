@@ -7,6 +7,7 @@ var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _recipeCards = {};
+var _currentRecipeCardId = null;
 
 var RecipeCardStore = assign({}, EventEmitter.prototype, {
 	init: function(recipes) {
@@ -31,8 +32,12 @@ var RecipeCardStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
 
+	getCurrent: function() {
+		return _currentRecipeCardId;
+	},
+
 	get: function(id) {
-		return _recipeCards[id];
+		return _recipeCards[id]
 	},
 
 	getAll: function() {
@@ -54,7 +59,10 @@ RecipeCardStore.dispatchToken = AppDispatcher.register(function(action) {
 			RecipeCardStore.emitChange();
 			console.log('Received recipes.');
 			break;
-		case ActionTypes.RECIPE_CARD_CLICKED:
+		case ActionTypes.CLICK_RECIPE_CARD:
+			_currentRecipeCardId = action.cardId;
+			RecipeCardStore.emitChange();
+			console.log('CLICK_RECIPE_CARD: ' + action.cardId);
 			break;
 		default:
 			// do nothing
