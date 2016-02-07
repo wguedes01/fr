@@ -28,7 +28,8 @@ var CardSet = React.createClass({
 						<Card
 							id={card.id}
 							text={card.text}
-							title={card.title} 
+							title={card.title}
+							url={card.url}
 							/>
 						</div>
 				);

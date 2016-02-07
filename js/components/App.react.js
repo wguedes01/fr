@@ -33,24 +33,24 @@ var App = React.createClass({
 
 	render: function() {
 		return (
-				<div className="container-fluid">		
+				<div className="container-fluid">
 					<div className="row">
 						<div className="col-md-1 sidebar">
-							<LeftSideMenu 
+							<LeftSideMenu
 								items={menuItems}
 								menuItemClicked={this.menuItemClicked}/>
 						</div>
 						<div className="col-md-15 main">
 							{
 								this.state.currentTab === 5 ?
-									<RecipeViewer 
+									<RecipeViewer
 										onBackBtnClick={this.handleBackBtnClick}
 									/> :
 									null
 							}
 							{
 								this.state.currentTab === 0 ?
-									<CardSet 
+									<CardSet
 										cards={this.state.recipeCards}
 										handleStartNewRecipeNav={this.handleStartNewRecipeNav}
 									/> :

@@ -15,10 +15,11 @@ var RecipeCardStore = assign({}, EventEmitter.prototype, {
 			_recipeCards[recipe.id] = {
 				id: recipe.id,
 				title: recipe.title,
-				text: recipe.text
+				text: recipe.text,
+				url: recipe.url ? recipe.url : "http://www.aviatorcameragear.com/wp-content/uploads/2012/07/placeholder.jpg"
 			}
 		}, this);
-	}, 
+	},
 
 	emitChange: function() {
 		this.emit(CHANGE_EVENT);
