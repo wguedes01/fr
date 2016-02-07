@@ -5,7 +5,7 @@ var RecipeViewer = React.createClass({
 	getInitialState: function() {
 		return {
 			visible: true,
-			cardId: RecipeCardStore.getCurrent()
+			card: RecipeCardStore.get(RecipeCardStore.getCurrent())
 		};
 	},
 
@@ -13,7 +13,8 @@ var RecipeViewer = React.createClass({
 		return (
 			<div className="container">
 				<p onClick={this._handleBackBtnClick}>Back</p>
-				<h1>{this.state.cardId}</h1>
+				<h1>{this.state.card.title}</h1>
+				<p>{this.state.card.text}</p>
 			</div>
 		);
 	},

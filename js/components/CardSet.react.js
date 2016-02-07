@@ -4,6 +4,9 @@ var AdBtnCard = require('./AdBtnCard.react');
 var CardSearch = require('./CardSearch.react');
 var assign = require('object-assign');
 
+// TODO: If you search something, then click card,
+// then come back to page. Search field is no longer populated
+
 var CardSet = React.createClass({
 	getInitialState: function() {
 		return {
@@ -18,8 +21,8 @@ var CardSet = React.createClass({
 			var card = cards[key];
 			if(this.state.filterValue == ''
 					// TODO: fix case sesitive search
-					|| card.text.indexOf(this.state.filterValue) !== -1
-					|| card.title.indexOf(this.state.filterValue) !== -1) {
+					|| card.text.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) !== -1
+					|| card.title.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) !== -1) {
 				cardComponents.push(
 					<div className="col-xs-6 col-md-3">
 						<Card
