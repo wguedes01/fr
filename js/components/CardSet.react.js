@@ -19,19 +19,24 @@ var CardSet = React.createClass({
 		var cardComponents = [];
 		for(key in cards) {
 			var card = cards[key];
+
+			var filterInTags = false;
+			for(i in card.tags) {
+				var tag = card.tags[i];
+				if(tag.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) >= 0) {
+					filterInTags = true;
+					break;
+				}
+			}
+
 			if(this.state.filterValue == ''
-					// TODO: fix case sesitive search
 					|| card.text.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) !== -1
-					|| card.title.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) !== -1) {
+					|| card.title.toUpperCase().indexOf(this.state.filterValue.toUpperCase()) !== -1
+					|| filterInTags) {
 				cardComponents.push(
 					<div className="col-xs-6 col-md-3">
-						<Card
-							id={card.id}
-							text={card.text}
-							title={card.title}
-							url={card.url}
-							/>
-						</div>
+						<Card card={card}	/>
+					</div>
 				);
 			}
 		}

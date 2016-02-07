@@ -4,6 +4,7 @@ var RecipeViewer = require('./RecipeViewer.react');
 var LeftSideMenu = require('./LeftSideMenu.react');
 var assign = require('object-assign');
 var RecipeCardStore = require('../stores/RecipeCardStore');
+var RecipeFromUrl = require('./RecipeFromUrl.react');
 
 var menuItems = [
 	{ id: 0, text: "Trending"},
@@ -25,10 +26,12 @@ var App = React.createClass({
 
 	componentDidMount: function() {
 		RecipeCardStore.addChangeListener(this._onChange);
+		RecipeCardStore.addClickListener(this._onCardClick);
 	},
 
 	componentWillUnmount: function() {
 		RecipeCardStore.removeChangeListener(this._onChange);
+		RecipeCardStore.removeClickListener(this._onCardClick);
 	},
 
 	render: function() {
@@ -50,10 +53,13 @@ var App = React.createClass({
 							}
 							{
 								this.state.currentTab === 0 ?
-									<CardSet
-										cards={this.state.recipeCards}
-										handleStartNewRecipeNav={this.handleStartNewRecipeNav}
-									/> :
+									<div>
+										<RecipeFromUrl />
+										<CardSet
+											cards={this.state.recipeCards}
+											handleStartNewRecipeNav={this.handleStartNewRecipeNav}
+										/>
+									</div>:
 									null
 							}
 						</div>
@@ -76,7 +82,11 @@ var App = React.createClass({
 	},
 
 	_onChange: function() {
-		console.log('listened....');
+		this.setState(assign({}, this.state, {recipeCards: RecipeCardStore.getAll()}));
+	},
+
+	_onCardClick: function() {
+		console.log('hi');
 		this.setState(assign({}, this.state, {currentTab: 5}));
 	}
 });

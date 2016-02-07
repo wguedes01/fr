@@ -5,6 +5,7 @@ var AppConstants = require('../constants/AppConstants');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
+var CLICK_EVENT = 'click';
 
 var _recipeCards = {};
 var _currentRecipeCardId = null;
@@ -16,7 +17,8 @@ var RecipeCardStore = assign({}, EventEmitter.prototype, {
 				id: recipe.id,
 				title: recipe.title,
 				text: recipe.text,
-				url: recipe.url ? recipe.url : "http://www.aviatorcameragear.com/wp-content/uploads/2012/07/placeholder.jpg"
+				url: recipe.url ? recipe.url : "http://www.aviatorcameragear.com/wp-content/uploads/2012/07/placeholder.jpg",
+				tags: recipe.tags
 			}
 		}, this);
 	},
@@ -25,12 +27,24 @@ var RecipeCardStore = assign({}, EventEmitter.prototype, {
 		this.emit(CHANGE_EVENT);
 	},
 
+	emitClick: function() {
+		this.emit(CLICK_EVENT);
+	},
+
 	addChangeListener: function(callback) {
 		this.on(CHANGE_EVENT, callback);
 	},
 
+	addClickListener: function(callback) {
+		this.on(CLICK_EVENT, callback);
+	},
+
 	removeChangeListener: function(callback) {
 		this.removeListener(CHANGE_EVENT, callback);
+	},
+
+	removeClickListener: function(callback) {
+		this.removeListener(CLICK_EVENT, callback);
 	},
 
 	getCurrent: function() {
@@ -48,6 +62,16 @@ var RecipeCardStore = assign({}, EventEmitter.prototype, {
 		}
 		console.log('getAll() - ' + cards.length);
 		return cards;
+	},
+
+	createRecipeFromUrl: function(url) {
+		console.log('Adding from url: ' + url);
+		_recipeCards['123'] = {
+				id: 123,
+				title: "1234",
+				text: url,
+				url: url
+		};
 	}
 
 });
@@ -58,12 +82,14 @@ RecipeCardStore.dispatchToken = AppDispatcher.register(function(action) {
 		case ActionTypes.RECEIVE_RECIPES:
 			RecipeCardStore.init(action.recipes);
 			RecipeCardStore.emitChange();
-			console.log('Received recipes.');
 			break;
 		case ActionTypes.CLICK_RECIPE_CARD:
 			_currentRecipeCardId = action.cardId;
+			RecipeCardStore.emitClick();
+			break;
+		case ActionTypes.CREATE_RECIPE_FROM_URL:
+			RecipeCardStore.createRecipeFromUrl(action.url);
 			RecipeCardStore.emitChange();
-			console.log('CLICK_RECIPE_CARD: ' + action.cardId);
 			break;
 		default:
 			// do nothing
